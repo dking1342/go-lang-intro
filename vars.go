@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func main() {
+func vars() {
 
 	// strings
 	// you can type the variable initially or go will infer the type
