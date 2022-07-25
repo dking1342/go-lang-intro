@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strconv"
 	"strings"
 )
 
@@ -40,15 +41,35 @@ func promptOptions(b bill) {
 	case "a":
 		name, _ := getInput("item name: ", reader)
 		price, _ := getInput("item price: ", reader)
-		fmt.Printf("you chose %v that has a price of $%v", name, price)
+		formattedPrice, err := strconv.ParseFloat(price, 64)
+
+		if err != nil {
+			fmt.Println("invalid price. please try again")
+			promptOptions(b)
+		}
+		b.addItem(name, formattedPrice)
+		fmt.Printf("you chose %v that has a price of $%0.2f\n", name, formattedPrice)
+		promptOptions(b)
+
 	case "s":
-		fmt.Println("you chose s")
+		fmt.Println("you chose to save the bill")
+		fmt.Println(b.format())
 	case "t":
 		tip, _ := getInput("enter tip amount ($): ", reader)
-		fmt.Printf("you gave a tip of $%v", tip)
+		formattedTip, err := strconv.ParseFloat(tip, 64)
+
+		if err != nil {
+			fmt.Println("invalid tip. please try again")
+			promptOptions(b)
+		}
+		b.updateTip(formattedTip)
+		fmt.Printf("you gave a tip of $%0.2f\n", formattedTip)
+		promptOptions(b)
+
 	case "x":
 		fmt.Println("thank you... see you later!")
 		break
+
 	default:
 		fmt.Println("invalid choice. please try again")
 		promptOptions(b)
