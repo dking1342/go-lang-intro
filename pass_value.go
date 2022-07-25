@@ -38,7 +38,7 @@ func updateLocation(location *string) {
 	*location = "France"
 }
 
-func main() {
+func pass_value() {
 	name := "hoho"
 
 	// makes a copy of the original

@@ -2,11 +2,9 @@ package main
 
 import "fmt"
 
-var score = 99.5
-
 func main() {
-	fmt.Println("Hello world")
+	myBill := newBill("kavooce's bill")
+	fmt.Println(myBill)
+	copy := myBill.format()
+	fmt.Println(copy)
 }
-
-// to run the file run the command:
-// go run <filename>
