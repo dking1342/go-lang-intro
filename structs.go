@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"strings"
 )
 
@@ -52,4 +53,17 @@ func (b *bill) updateTip(tip float64) {
 // make sure to add asterick to object for the pointer *bill
 func (b *bill) addItem(name string, price float64) {
 	b.items[name] = price
+}
+
+// save bill
+func (b *bill) save() {
+	data := []byte(b.format())
+
+	// writing a file
+	err := os.WriteFile("bills/"+b.name+".txt", data, 0644)
+
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println("bill was saved to file")
 }
