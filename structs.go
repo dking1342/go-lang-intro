@@ -21,19 +21,35 @@ func newBill(name string) bill {
 	return b
 }
 
-// format the bill
-func (b bill) format() string {
+// get the bill
+func (b *bill) format() string {
 	formattedString := "Bill breakdown: \n"
 	var total float64 = 0
 
 	// list items
 	for key, value := range b.items {
-		formattedString += fmt.Sprintf("%-25v ... $%v\n", key+":", value)
+		formattedString += fmt.Sprintf("%-25v ... $%0.2f\n", key+":", value)
 		total += value
 	}
+
+	// tip
+	total += b.tip
+	formattedString += fmt.Sprintf("%-25v ... $%0.2f\n", "tip:", b.tip)
 
 	// total
 	formattedString += fmt.Sprintf("%-25v ... $%0.2f\n", "total:", total)
 
 	return formattedString
+}
+
+// update the bill - tip
+// make sure to add asterick to object for the pointer *bill
+func (b *bill) updateTip(tip float64) {
+	b.tip = tip
+}
+
+// update the bill - items
+// make sure to add asterick to object for the pointer *bill
+func (b *bill) addItem(name string, price float64) {
+	b.items[name] = price
 }

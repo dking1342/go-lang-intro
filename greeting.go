@@ -8,6 +8,6 @@ func greet(n string) {
 	fmt.Println("hello", n)
 }
 
-func showScore() {
-	fmt.Println("you scored", score)
-}
+// func showScore() {
+// 	fmt.Println("you scored", score)
+// }
