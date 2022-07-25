@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 type bill struct {
 	name  string
@@ -10,13 +13,10 @@ type bill struct {
 
 // make new bills
 func newBill(name string) bill {
+	formattedName := strings.Title(strings.ToLower(name))
 	b := bill{
-		name: name,
-		items: map[string]float64{
-			"pie":  5.99,
-			"cake": 3.99,
-		},
-		tip: 0,
+		name:  fmt.Sprintf("%v's bill", formattedName),
+		items: map[string]float64{},
 	}
 	return b
 }
